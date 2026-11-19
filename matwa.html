@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Statistika FESBUD · Kelompok XI-4</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6e8;--ink:#3a1410;--blue:#bcd0ec;--pink:#f2c4c8;--olive:#cfc06a;--yel:#f3d46a;--org:#d9421c;--card:#fffdf8;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241210;--ink:#fbeedd;--blue:#3d5379;--pink:#6b3a42;--olive:#6f6630;--yel:#7d6419;--org:#ff7a52;--card:#33201d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#241210;--ink:#fbeedd;--blue:#3d5379;--pink:#6b3a42;--olive:#6f6630;--yel:#7d6419;--org:#ff7a52;--card:#33201d;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font:16px/1.6 'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--blue);z-index:30}
+h1,h2,h3,.ser{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.08}
+h1{font-size:clamp(2.6rem,7vw,4.6rem)}h2{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:6px}h3{font-size:1.35rem}
+.hand{font-family:'Caveat',cursive;font-size:1.6rem;color:var(--org)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--blue);display:flex;align-items:center;gap:10px 16px;padding:10px 18px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.logo{font-size:1.4rem;margin-right:auto}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.9rem;padding:5px 13px;border-radius:99px;border:2px solid transparent;transition:.2s}
+nav a:hover{border-color:var(--ink)}nav a.on{background:var(--ink);color:var(--bg)}
+.coins{font-weight:700;background:var(--yel);border:2px solid var(--ink);border-radius:99px;padding:3px 12px;color:var(--ink)}
+.coins.bump{animation:bump .4s}@keyframes bump{50%{transform:scale(1.3) rotate(-6deg)}}
+.tick{overflow:hidden;background:var(--ink);color:var(--bg);white-space:nowrap;font-size:.78rem;letter-spacing:.1em}
+.tick div{display:inline-block;padding:7px 0;animation:mq 40s linear infinite}@keyframes mq{to{transform:translateX(-50%)}}
+.view{padding-bottom:60px;animation:up .5s both}.view[hidden]{display:none}@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.hero{background:repeating-linear-gradient(90deg,var(--blue) 0 30px,var(--bg) 30px 60px);border-bottom:2px solid var(--ink);margin-bottom:10px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;padding:44px 18px;align-items:center}
+.panel{background:var(--bg);border:2px solid var(--ink);border-radius:22px;padding:24px;box-shadow:6px 6px 0 var(--ink)}
+.panel p{margin:12px 0 16px;max-width:52ch}
+.stk{display:grid;gap:14px}
+.stk div{border:2px solid var(--ink);border-radius:50px 50px 50px 14px;padding:14px 22px;font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--ink);animation:bob 4s ease-in-out infinite;box-shadow:4px 4px 0 var(--ink)}
+.stk div:nth-child(1){background:var(--pink);transform:rotate(-3deg)}.stk div:nth-child(2){background:var(--yel);margin-left:30px;animation-delay:-1.3s}.stk div:nth-child(3){background:var(--olive);transform:rotate(2deg);animation-delay:-2.6s}
+.stk small{display:block;font:600 .85rem 'DM Sans';opacity:.85}
+@keyframes bob{50%{translate:0 -9px}}
+.cn{position:fixed;font-size:1.6rem;animation:fall 7s linear infinite;pointer-events:none;z-index:5;opacity:.7}@keyframes fall{from{top:-40px}to{top:105vh;rotate:360deg}}
+.btn,.chip{font:inherit;font-weight:700;color:var(--ink);border:2px solid var(--ink);background:var(--card);border-radius:99px;padding:7px 16px;cursor:pointer;transition:.18s;text-decoration:none;display:inline-block}
+.btn{background:var(--org);color:#fff;box-shadow:3px 3px 0 var(--ink);margin-right:8px}
+.btn:hover,.chip:hover{transform:translateY(-2px) rotate(-1deg)}.chip.on{background:var(--org);color:#fff}
+:focus-visible{outline:3px solid var(--org);outline-offset:2px}
+.sec{margin-top:44px}.sec>p{max-width:62ch;margin-bottom:16px}
+.scal{height:16px;margin-top:40px;background:radial-gradient(circle at 10px 0,var(--pink) 9px,transparent 10px) 0 0/20px 16px repeat-x}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:18px;box-shadow:4px 4px 0 var(--ink);transition:transform .25s}
+.card:hover{transform:translate(-2px,-3px) rotate(-.5deg)}
+.pk{background:var(--pink)}.bl{background:var(--blue)}.ol{background:var(--olive)}.yl{background:var(--yel)}
+.card p{margin-top:6px;font-size:.95rem}
+.tw{overflow-x:auto;border:2px solid var(--ink);border-radius:16px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:480px}
+th{background:var(--ink);color:var(--bg);cursor:pointer;padding:10px;text-align:center;user-select:none}
+td{padding:9px;text-align:center;border-top:1px solid color-mix(in srgb,var(--ink) 20%,transparent)}
+tbody tr{cursor:pointer;transition:background .15s}tbody tr:hover,tbody tr.on{background:var(--yel)}
+.rk{display:inline-block;min-width:28px;border-radius:99px;background:var(--pink);font-weight:700;border:2px solid var(--ink)}
+.rk.r1{background:var(--yel)}
+.meter{margin:7px 0}.meter span{display:flex;justify-content:space-between;font-weight:700;font-size:.9rem}
+.meter i{display:block;height:14px;border:2px solid var(--ink);border-radius:9px;overflow:hidden;background:var(--bg)}
+.meter b{display:block;height:100%;width:0;transition:width 1s cubic-bezier(.2,.9,.3,1)}
+.team{display:flex;flex-wrap:wrap;gap:10px}
+.team span{border:2px dashed var(--ink);border-radius:14px;padding:7px 14px;background:var(--card);font-weight:700}
+.team span:nth-child(odd){transform:rotate(-1.5deg)}.team span:nth-child(even){transform:rotate(1.5deg)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.svg{width:100%;height:auto;color:var(--ink);display:block}
+.gr{transform-box:fill-box;transform-origin:50% 100%;animation:gr .7s cubic-bezier(.2,.9,.3,1.2) both;animation-delay:var(--d,0s)}
+@keyframes gr{from{transform:scaleY(0)}}
+.sl{transition:transform .25s;animation:fd .6s both}.sl:hover{transform:translate(var(--mx),var(--my))}@keyframes fd{from{opacity:0}}
+.two{display:grid;gap:22px;grid-template-columns:1fr 1fr;align-items:center}
+@media(max-width:760px){.hero .wrap,.two{grid-template-columns:1fr}.stk div:nth-child(2){margin-left:0}}
+.big{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1}
+.nl{position:relative;height:84px;margin:10px 14px 4px}.nl .ln{position:absolute;top:56px;left:0;right:0;height:6px;background:var(--ink);border-radius:9px}
+.mk{position:absolute;top:50px;width:4px;height:18px;background:var(--ink);opacity:.35;transform:translateX(-50%);border-radius:3px}
+.me{position:absolute;top:8px;transform:translateX(-50%);transition:left .9s cubic-bezier(.3,1.4,.4,1);text-align:center;font-weight:700}
+.me b{display:block;background:var(--org);color:#fff;padding:2px 10px;border-radius:9px;white-space:nowrap}
+.ax{display:flex;justify-content:space-between;margin:0 14px;font-size:.8rem;opacity:.8}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);padding:5px 10px;border-radius:8px;font-size:.8rem;opacity:0;z-index:50;transition:opacity .15s}
+.fb{min-height:1.6em;font-weight:700;margin-top:8px}.shake{animation:sh .4s}@keyframes sh{25%{translate:-8px}75%{translate:8px}}
+.pop{position:fixed;font-size:1.8rem;pointer-events:none;z-index:60;animation:pp 1s ease-out forwards}@keyframes pp{to{transform:translate(var(--x),var(--y)) rotate(540deg);opacity:0}}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:10px}.vs .btn{margin:0;width:100%;font-size:1.4rem;padding:16px}
+footer{text-align:center;font-size:.85rem;padding:30px 18px;border-top:2px solid var(--ink);background:var(--blue)}
+/* pop up cara pengerjaan */
+.how{margin-top:10px;font-size:.85rem;padding:5px 12px}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+.mo.show{display:flex}
+.mb{background:var(--card);border:2px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);max-width:560px;width:100%;max-height:85vh;overflow:auto;padding:24px;position:relative;animation:up .3s both}
+.mb h3{margin:0 34px 6px 0}
+.mb p{font-size:.95rem}
+.mb ol{padding-left:22px}.mb li{margin:9px 0}
+.fm{margin:12px 0;background:var(--yel);color:var(--ink);border:2px solid var(--ink);border-radius:12px;padding:8px 14px;font-weight:700}
+.nt{margin-top:12px;font-size:.88rem;border-left:4px solid var(--org);padding-left:10px}
+.x{position:absolute;top:12px;right:12px;padding:3px 11px}
+table.mini{min-width:0;margin:10px 0;border:2px solid var(--ink);font-size:.9rem}
+.mini th{cursor:default;padding:6px}.mini td{padding:5px}.mini tbody tr{cursor:default}
+.gi{margin:0;padding:12px;text-align:center;cursor:zoom-in}.gi img{width:100%;border-radius:10px;border:2px solid var(--ink);display:block}.gi p{font-weight:700;margin-top:8px}
+#lb{cursor:zoom-out}#lb img{max-width:100%;max-height:88vh;border-radius:14px;border:3px solid var(--ink);background:#fff}
+.calc{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));margin:14px 0}.calc label{font-weight:700;font-size:.85rem;display:block}
+.calc input,.calc select{width:100%;font:inherit;padding:8px;border:2px solid var(--ink);border-radius:10px;background:var(--bg);color:var(--ink)}
+.edit{min-height:90px;border:2px dashed var(--ink);border-radius:14px;padding:12px;background:var(--card)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header class="top"><a class="logo ser" href="#data" style="color:var(--ink);text-decoration:none">statistika·fesbud!</a>
+<nav><a href="#data">Isi Data</a><a href="#grafik">Grafik</a><a href="#statistik">Statistik</a><a href="#kesimpulan">Kesimpulan</a><a href="#game">Arena Game</a></nav><button class="chip" id="th" title="Ganti tema terang/gelap" style="padding:3px 11px">🌓</button>
+<span class="coins" id="coins" title="Koin dari game">🪙 0</span></header>
+<div class="tick" id="tick"></div><div id="tip"></div>
+<main>
+<section class="view" id="v-data">
+<div class="hero"><div class="wrap">
+<div class="panel"><p class="hand" style="margin:0">kelompok XI-4 presents</p>
+<h1>Statistika<br>FESBUD</h1>
+<p>Halaman ini merangkum penilaian <b>Penampilan Kelas 12</b> pada FESBUD: sepuluh kelas (12-1 sampai 12-10) dinilai, lalu nilainya kami olah dengan statistika deskriptif. Mulai dari tabel di bawah, lalu coba tebak histogramnya di Arena Game.</p>
+<a class="btn" href="#grafik">Lihat grafik</a><a class="btn" style="background:var(--blue);color:var(--ink)" href="#game">Main game</a></div>
+<div class="stk"><div>10 kelas<small>12-1 sampai 12-10</small></div><div>3 jenis nilai<small>rata-rata, kreativitas, kekompakan</small></div><div>5 ukuran<small>mean, modus, kuartil, desil, persentil</small></div></div>
+</div></div>
+<div class="wrap">
+<div class="sec"><h2>Apa saja isi datanya?</h2><p>Setiap kelas punya tiga nilai dan satu peringkat. Semua nilai berada di rentang 93 sampai 99, jadi selisih antarkelas tipis dan seru dibandingkan.</p>
+<div class="grid">
+<div class="card bl"><h3>Nilai rata-rata</h3><p>Nilai akumulasi tiap kelas dari seluruh kriteria penilaian. Rentang 94,5 sampai 97,5.</p></div>
+<div class="card pk"><h3>Kreativitas</h3><p>Seberapa kreatif penampilan kelas. Rentang 95 sampai 99, dengan 12-6, 12-8, dan 12-10 sebagai nilai tertinggi.</p></div>
+<div class="card ol"><h3>Kekompakan</h3><p>Seberapa kompak tim di panggung. Rentang 93 sampai 99, dengan 12-7 sebagai nilai tertinggi.</p></div>
+<div class="card yl"><h3>Peringkat</h3><p>Urutan berdasarkan nilai rata-rata. Kelas dengan nilai sama berbagi peringkat yang sama.</p></div></div>
+
+<!-- HASIL PENILAIAN UJIAN PRAKTEK -->
+<div class="card" style="margin-top: 18px; text-align: center;">
+  <h3>Hasil Penilaian Ujian Praktek</h3>
+  <img src="data.png" alt="Hasil penilaian ujian praktek" style="width:100%; max-width:600px; border-radius:12px; border:2px solid var(--ink); margin-top:10px;">
+</div>
+
+</div>
+<div class="sec"><h2>Ukuran statistik yang dihitung</h2><div class="grid">
+<div class="card"><h3>Mean</h3><p>Rata-rata data berkelompok: jumlah (frekuensi × titik tengah) dibagi banyak data.</p></div>
+<div class="card"><h3>Modus</h3><p>Nilai yang paling sering muncul di kelas interval dengan frekuensi tertinggi.</p></div>
+<div class="card"><h3>Kuartil</h3><p>Membagi data jadi 4 bagian sama: Q1, Q2, Q3.</p></div>
+<div class="card"><h3>Desil</h3><p>Membagi data jadi 10 bagian: D1, D5, D9.</p></div>
+<div class="card"><h3>Persentil</h3><p>Membagi data jadi 100 bagian: P1 sampai P90.</p></div></div></div>
+<div class="scal"></div>
+<div class="sec"><h2>Tabel hasil</h2><p>Klik judul kolom untuk mengurutkan, klik baris untuk melihat profil kelas.</p>
+<div class="tw"><table><thead><tr><th data-k="n">Kelas</th><th data-k="r">Nilai rata-rata</th><th data-k="c">Kreativitas</th><th data-k="e">Kekompakan</th><th data-k="p">Peringkat</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="card" id="prof" style="margin-top:18px"></div></div>
+<div class="sec"><h2>Tim penyusun</h2><div class="team"><span>Aline Sadira (5)</span><span>Fathiyyah Huwaidah (16)</span><span>Khansa Irdina (18)</span><span>Khansa Putri (19)</span><span>Maria Chaterine (23)</span></div></div>
+</div></section>
+
+<section class="view wrap" id="v-grafik" hidden>
+<div class="sec"><h2>Nilai tiap kelas</h2><p>Pilih nilai yang ingin dibandingkan. Sumbu dimulai dari 90 supaya selisih kecil terlihat.</p>
+<div class="row" id="bt"></div><div class="card"><div id="bars"></div></div></div>
+<div class="sec"><h2>Porsi nilai rata-rata</h2><p>Arahkan kursor atau tekan sebuah irisan. Porsinya hampir rata, karena nilainya berdekatan.</p>
+<div class="card"><div style="max-width:420px;margin:auto" id="dn"></div></div></div>
+<div class="sec"><h2>Histogram</h2><div class="row" id="ht"></div><div class="card"><div id="hs" style="max-width:560px;margin:auto"></div></div></div>
+</section>
+
+<section class="view wrap" id="v-statistik" hidden>
+<div class="sec"><h2>Jelajah statistik</h2><div class="row" id="st"></div>
+<div class="grid" id="sc"></div>
+<div class="two sec"><div class="card"><h3>Tabel frekuensi</h3><div id="ft"></div></div>
+<div class="card"><h3>Posisi data</h3><p>Pilih ukuran, lalu lihat letaknya di garis nilai.</p><div class="row" id="pc"></div><div class="nl" id="nl"></div><div class="ax" id="ax"></div><p class="fb" id="pd"></p></div></div>
+</div>
+</section>
+
+<section class="view wrap" id="v-kesimpulan" hidden>
+<div class="sec"><h2>Kesimpulan data</h2><p>Dihitung otomatis dari data nilai kelas.</p><div class="grid" id="kc"></div><div class="card yl" style="margin-top:18px;background:var(--yel)"><h3>Perbandingan</h3><p id="kb"></p></div></div>
+<div class="sec"><h2>Kesimpulan kelompok</h2><div class="card"><ol style="padding-left:22px">
+<li style="margin:9px 0"><b>Nilai rata-rata</b> sepuluh kelas berada di rentang 94,5 sampai 97,5 dengan mean 96,65, median 97,12, dan modus 97,28. Karena median dan modus lebih tinggi dari mean, sebagian besar kelas bernilai tinggi dan hanya sedikit yang rendah (12-3 dengan 94,5). Kelas 12-6 dan 12-10 menempati peringkat 1.</li>
+<li style="margin:9px 0"><b>Kreativitas</b> menjadi nilai dengan rata-rata tertinggi (97,5 pada data tunggal, 97,7 pada data berkelompok), dengan median 98 dan modus 98,29. Nilai tertinggi 99 diraih 12-6, 12-8, dan 12-10. Rentangnya 4, jadi kreativitas antarkelas cukup merata.</li>
+<li style="margin:9px 0"><b>Kekompakan</b> memiliki rata-rata terendah (96 pada data tunggal, 96,15 pada data berkelompok), dengan median 96 dan modus 95,25. Nilainya paling beragam (rentang 6, dari 93 sampai 99). Kelas 12-7 paling kompak dengan nilai 99, sedangkan 12-2 terendah dengan 93.</li>
+<li style="margin:9px 0"><b>Letak data:</b> pada nilai rata-rata, 75% kelas bernilai di bawah 97,53 (Q3). Pada kreativitas Q3 = 98,5 dan pada kekompakan Q3 = 97,75. Artinya seperempat kelas teratas jelas unggul, dan selisih antarkelas pada penampilan kelas 12 tipis.</li>
+<li style="margin:9px 0"><b>Kesimpulan akhir:</b> penampilan kelas 12 di FESBUD sudah sangat baik karena semua nilai di atas 93. Kreativitas paling kuat, sedangkan kekompakan masih bisa ditingkatkan karena paling beragam antarkelas.</li></ol></div></div>
+<div class="sec"><h2>Coba hitung sendiri</h2><p>Masukkan angka dari tabel frekuensi untuk menghitung kuartil, desil, atau persentil. Isi awal adalah contoh Q3 nilai rata-rata (hasilnya 97,53).</p>
+<div class="card"><div class="calc">
+<div><label for="cs">Ukuran</label><select id="cs"><option value="4">Kuartil (Qi)</option><option value="10">Desil (Di)</option><option value="100">Persentil (Pi)</option></select></div>
+<div><label for="ci">i</label><input id="ci" inputmode="decimal" value="3"></div>
+<div><label for="cn">n (banyak data)</label><input id="cn" inputmode="decimal" value="10"></div>
+<div><label for="cb">Tb (tepi bawah)</label><input id="cb" inputmode="decimal" value="96,95"></div>
+<div><label for="cF">F (fk sebelum kelas)</label><input id="cF" inputmode="decimal" value="4"></div>
+<div><label for="cf">f (frekuensi kelas)</label><input id="cf" inputmode="decimal" value="6"></div>
+<div><label for="cp">p (panjang kelas)</label><input id="cp" inputmode="decimal" value="1"></div></div>
+<button class="btn" id="cgo">Hitung</button><div class="fm" id="cr" style="margin-top:14px">Klik Hitung.</div></div></div>
+</section>
+
+<section class="view wrap" id="v-game" hidden>
+<div class="sec"><h2>Arena Game</h2><p>Kumpulkan koin dengan menebak data. Koin tersimpan di peramban ini.</p></div>
+<div class="two">
+<div class="card"><h3>Tebak Histogram</h3><p>Histogram ini milik nilai yang mana?</p><div id="ga" style="max-width:420px;margin:auto"></div>
+<div class="row" id="gao"></div><button class="chip" id="hint">Petunjuk (−3 koin)</button><p class="fb" id="gaf"></p></div>
+<div class="card yl" style="background:var(--yel)"><h3>Mana yang lebih tinggi?</h3><p id="gbq"></p><div class="vs" id="gb"></div><p class="fb" id="gbf"></p><p>Streak: <b id="sk">0</b></p></div>
+</div></section>
+</main>
+<div class="mo" id="mo"><div class="mb" role="dialog" aria-modal="true"><button class="chip x" id="mx" aria-label="Tutup">✕</button><div id="mc"></div></div></div>
+<footer>Dibuat oleh Kelompok XI-4 · Statistika FESBUD · desain berwarna retro, data dari presentasi kami</footer>
+<script>
+const $=s=>document.querySelector(s),fmt=n=>String(n).replace('.',','),K=[...Array(10)].map((_,i)=>'12-'+(i+1)),
+R=[97,97,94.5,96,96.5,97.5,97,97,96.5,97.5],C=[98,96,97,98,97,99,95,99,97,99],E=[96,93,95,95,98,95,99,94,98,97],PK=[2,2,5,4,3,1,2,2,3,1],
+D={R,C,E},N={R:'Nilai rata-rata',C:'Kreativitas',E:'Kekompakan'},CL={R:'#4a7bbf',C:'#d4553c',E:'#6f9a3a'};
+
+/* ===== DATA BERKELOMPOK (sesuai perhitungan di slide) =====
+   lab = interval, tb = tepi bawah (Tb), xi = titik tengah, f = frekuensi, p = panjang kelas */
+const G={
+R:{lab:['94–94,5','95–95,5','96–96,5','97–97,5'],tb:[93.95,94.95,95.95,96.95],xi:[94.25,95.25,96.25,97.25],f:[1,0,3,6],p:1,lo:94,hi:98,pl:['P10','P50','P90']},
+C:{lab:['95–96','96–97','97–98','98–99'],tb:[95,96,97,98],xi:[95.5,96.5,97.5,98.5],f:[1,1,3,5],p:1,lo:95,hi:99,pl:['P1','P50','P90'],tg:['97,5','97 (nilai 99 juga muncul 3 kali, jadi data tunggalnya punya dua modus)']},
+E:{lab:['93–94,5','94,5–96','96–97,5','97,5–99'],tb:[93,94.5,96,97.5],xi:[93.75,95.25,96.75,98.25],f:[2,3,2,3],p:1.5,lo:93,hi:99,pl:['P1','P50','P90'],tg:['96','95']}};
+const NN=10;
+for(const k in G){const g=G[k];let a=0;g.fk=g.f.map(v=>a+=v)}
+/* pembulatan: 2 desimal, kecuali yang memang berhenti di 3 desimal (mis. 93,075) */
+const r=x=>{const t=+x.toFixed(3);return Math.abs(x-t)<1e-9&&Math.abs(t*100-Math.round(t*100))>1e-6?t:+x.toFixed(2)};
+function mean(k){const g=G[k],s=g.f.reduce((a,f,i)=>a+f*g.xi[i],0);return{s:+s.toFixed(3),val:r(s/NN)}}
+function modus(k){const g=G[k],m=g.f.indexOf(Math.max(...g.f)),d1=g.f[m]-(m?g.f[m-1]:0),d2=g.f[m]-(m<3?g.f[m+1]:0),fr=r(d1/(d1+d2)*g.p);return{m,d1,d2,fr,val:r(+(g.tb[m]+fr).toFixed(3))}}
+function loc(k,q,i){const g=G[k],L=i*NN/q,x=g.fk.findIndex(c=>c>=L-1e-9),F=x?g.fk[x-1]:0,f=g.f[x],fr=r((L-F)/f*g.p);return{L,x,F,f,fr,val:r(+(g.tb[x]+fr).toFixed(3))}}
+const S={};for(const k in G){const g=G[k];S[k]={t:g.lab.map((l,i)=>[l,g.f[i]]),lo:g.lo,hi:g.hi,mean:mean(k).val,mo:modus(k).val,q:[1,2,3].map(i=>loc(k,4,i).val),d:[1,5,9].map(i=>loc(k,10,i).val),p:g.pl.map(x=>loc(k,100,+x.slice(1)).val),pl:g.pl}}
+
+let coins=0;try{coins=+localStorage.getItem('fc')||0}catch(e){}
+function addCoin(n){coins=Math.max(0,coins+n);$('#coins').textContent='🪙 '+coins;$('#coins').classList.remove('bump');void $('#coins').offsetWidth;$('#coins').classList.add('bump');try{localStorage.setItem('fc',coins)}catch(e){}}
+function burst(){for(let i=0;i<14;i++){const s=document.createElement('span');s.className='pop';s.textContent='🪙';s.style.left='50%';s.style.top='45%';s.style.setProperty('--x',(Math.random()*500-250)+'px');s.style.setProperty('--y',(Math.random()*-300-40)+'px');document.body.append(s);setTimeout(()=>s.remove(),1000)}}
+$('#tick').innerHTML='<div>'+'★ penampilan kelas 12 ♥ 10 kelas, 3 nilai ♥ tebak histogram, kumpulkan koin ♥ kelompok XI-4 '.repeat(8)+'</div>';
+for(let i=0;i<6;i++){const c=document.createElement('span');c.className='cn';c.textContent='🪙';c.style.left=(8+i*17)+'%';c.style.animationDelay=(-i*1.4)+'s';c.style.animationDuration=(6+i)+'s';document.body.append(c)}
+document.addEventListener('pointermove',e=>{const t=e.target.closest&&e.target.closest('[data-t]'),p=$('#tip');p.style.opacity=t?1:0;if(t){p.textContent=t.dataset.t;p.style.left=Math.min(e.clientX+12,innerWidth-160)+'px';p.style.top=e.clientY+14+'px'}
+const s=e.target.closest&&e.target.closest('[data-i][data-t]');if(s&&$('#dk')){$('#dk').textContent=K[s.dataset.i];$('#dp').textContent=s.dataset.t.split(': ')[1]}});
+function hist(lb,ct,col,hide){const W=420,x0=34,b=(W-x0-10)/ct.length,m=Math.max(...ct)+1;let s=`<svg viewBox="0 0 ${W} 225" class="svg">`;
+for(let g=0;g<=m;g++){const y=190-g*150/m;s+=`<line x1="${x0}" x2="${W-6}" y1="${y}" y2="${y}" stroke="currentColor" opacity=".15"/><text x="${x0-8}" y="${y+4}" text-anchor="end" font-size="11" fill="currentColor">${g}</text>`}
+ct.forEach((c,i)=>{const h=c*150/m,x=x0+i*b+6,w=b-12;s+=`<rect class="gr" style="--d:${i*.12}s" x="${x}" y="${190-h}" width="${w}" height="${h}" rx="5" fill="${col}" stroke="currentColor" stroke-width="2" data-t="${lb[i]}: ${c} kelas"/>`+(c?`<text x="${x+w/2}" y="${183-h}" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">${c}</text>`:'')+`<text x="${x+w/2}" y="210" text-anchor="middle" font-size="11" fill="currentColor" opacity="${hide?0:1}">${lb[i]}</text>`});
+return s+'</svg>'}
+const chips=(el,items,cur,fn)=>{el.innerHTML=items.map(([k,l])=>`<button class="chip${cur(k)?' on':''}" data-k="${k}">${l}</button>`).join('');el.onclick=e=>{const k=e.target.dataset.k;if(k){fn(k);chips(el,items,cur,fn)}}};
+const V3=Object.keys(N).map(k=>[k,N[k]]);
+/* DATA */
+let sk='n',sd=1,sel=5;
+function table(){const rows=K.map((n,i)=>({n,i,r:R[i],c:C[i],e:E[i],p:PK[i]}));rows.sort((a,b)=>sk==='n'?(a.i-b.i)*sd:(a[sk]-b[sk])*sd);
+$('#tb').innerHTML=rows.map(o=>`<tr data-i="${o.i}" class="${o.i===sel?'on':''}"><td><b>${o.n}</b></td><td>${fmt(o.r)}</td><td>${o.c}</td><td>${o.e}</td><td><span class="rk r${o.p}">${o.p}</span></td></tr>`).join('');prof()}
+function prof(){const i=sel;$('#prof').innerHTML=`<h3>Profil kelas ${K[i]}</h3>`+['R','C','E'].map(k=>`<div class="meter"><span>${N[k]}<span>${fmt(D[k][i])}</span></span><i><b data-w="${(D[k][i]-90)*10}" style="background:${CL[k]}"></b></i></div>`).join('')+`<p>Peringkat ${PK[i]}${PK[i]==1?' 🏆':''}</p>`;requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('.meter b').forEach(b=>b.style.width=b.dataset.w+'%')))}
+$('thead').onclick=e=>{const k=e.target.dataset.k;if(!k)return;sd=sk===k?-sd:1;sk=k;table()};
+$('#tb').onclick=e=>{const r=e.target.closest('tr');if(r){sel=+r.dataset.i;table()}};
+/* GRAFIK */
+const on={R:1,C:1,E:1};
+function bars(){const ks=['R','C','E'].filter(k=>on[k]),W=760,x0=40,gw=(W-x0-10)/10,w=Math.min(20,(gw-10)/Math.max(ks.length,1));let s=`<svg viewBox="0 0 ${W} 285" class="svg">`;
+[90,92.5,95,97.5,100].forEach(v=>{const y=250-(v-90)*23;s+=`<line x1="${x0}" x2="${W}" y1="${y}" y2="${y}" stroke="currentColor" opacity=".15"/><text x="${x0-6}" y="${y+4}" text-anchor="end" font-size="11" fill="currentColor">${v}</text>`});
+K.forEach((n,i)=>{ks.forEach((k,j)=>{const v=D[k][i],h=(v-90)*23;s+=`<rect class="gr" style="--d:${i*.05}s" x="${x0+i*gw+(gw-w*ks.length)/2+j*w}" y="${250-h}" width="${w-2}" height="${h}" rx="3" fill="${CL[k]}" data-t="${n} · ${N[k]}: ${fmt(v)}"/>`});s+=`<text x="${x0+i*gw+gw/2}" y="272" text-anchor="middle" font-size="12" fill="currentColor">${n}</text>`});$('#bars').innerHTML=s+'</svg>'}
+function donut(){const T=R.reduce((a,b)=>a+b),cs=['#4a7bbf','#d4553c','#6f9a3a','#7a5ea8','#3fa3c0','#f0913f','#7ea0cf','#d58080','#b9c982','#a58fc2'];let a=-Math.PI/2,s='<svg viewBox="-110 -110 220 220" class="svg">';
+R.forEach((v,i)=>{const d=v/T*6.2832,m=a+d/2,P=t=>[Math.cos(t)*100,Math.sin(t)*100];s+=`<path class="sl" style="--mx:${Math.cos(m)*8}px;--my:${Math.sin(m)*8}px;animation-delay:${i*.08}s" d="M0 0L${P(a)}A100 100 0 0 1 ${P(a+d)}Z" fill="${cs[i]}" stroke="var(--bg)" stroke-width="2" data-i="${i}" data-t="${K[i]}: ${(v/T*100).toFixed(1)}%"/>`;a+=d});
+$('#dn').innerHTML=s+`<circle r="50" fill="var(--bg)" pointer-events="none"/><text id="dk" y="-2" text-anchor="middle" font-size="18" font-family="DM Serif Display" fill="currentColor">Kelas</text><text id="dp" y="18" text-anchor="middle" font-size="13" fill="currentColor">sentuh irisan</text></svg>`}
+let hv='C';
+function hs(){const t=S[hv].t;$('#hs').innerHTML=hist(t.map(x=>x[0]),t.map(x=>x[1]),CL[hv])}
+/* STATISTIK */
+let sv='R',sm=null;
+function cnt(el,to){const t0=performance.now();(function f(t){const p=Math.min((t-t0)/900,1);el.textContent=fmt((to*(1-Math.pow(1-p,3))).toFixed(2).replace(/\.?0+$/,''));if(p<1)requestAnimationFrame(f)})(t0)}
+function ftab(k){const g=G[k];return '<table class="mini"><thead><tr><th>Interval</th><th>f</th><th>xᵢ</th><th>fk</th></tr></thead><tbody>'+g.lab.map((l,i)=>`<tr><td>${l}</td><td>${g.f[i]}</td><td>${fmt(g.xi[i])}</td><td>${g.fk[i]}</td></tr>`).join('')+`<tr><td><b>Jumlah</b></td><td><b>${NN}</b></td><td></td><td></td></tr></tbody></table>`}
+function stat(){const s=S[sv];chips($('#st'),V3,k=>k===sv,k=>{sv=k;sm=null;stat()});
+$('#sc').innerHTML=[['Mean',s.mean,'bl','mean'],['Modus',s.mo,'pk','modus'],['Median (Q2)',s.q[1],'ol','Q2']].map(([l,v,c,m])=>`<div class="card ${c}"><p>${l}</p><div class="big" data-v="${v}">0</div><button class="chip how" data-k="${m}">Cara pengerjaan</button></div>`).join('');
+document.querySelectorAll('.big').forEach(b=>cnt(b,+b.dataset.v));
+$('#ft').innerHTML=ftab(sv)+hist(s.t.map(x=>x[0]),s.t.map(x=>x[1]),CL[sv]);
+const it=[...s.q.map((v,i)=>['Q'+(i+1),v,25*(i+1)]),...s.d.map((v,i)=>['D'+[1,5,9][i],v,[10,50,90][i]]),...s.p.map((v,i)=>[s.pl[i],v,+s.pl[i].slice(1)])];
+chips($('#pc'),it.map(x=>[x[0],x[0]]),k=>k===sm,k=>{sm=k;pos(it,s)});
+const pc=v=>(v-s.lo)/(s.hi-s.lo)*100;
+$('#nl').innerHTML='<div class="ln"></div>'+it.map(x=>`<div class="mk" style="left:${pc(x[1])}%"></div>`).join('')+'<div class="me" id="me" style="left:50%;opacity:0"></div>';
+$('#ax').innerHTML=`<span>${s.lo}</span><span>${s.hi}</span>`;$('#pd').textContent='';}
+function pos(it,s){const x=it.find(o=>o[0]===sm),m=$('#me');m.style.opacity=1;m.innerHTML=`<b>${x[0]} = ${fmt(x[1])}</b>▼`;m.style.left=Math.min(Math.max((x[1]-s.lo)/(s.hi-s.lo)*100,6),94)+'%';$('#pd').innerHTML=`Sekitar ${x[2]}% data berada di bawah nilai ${fmt(x[1])}.<br><button class="chip how" data-k="${x[0]}">Cara pengerjaan ${x[0]}</button>`}
+/* POP UP CARA PENGERJAAN */
+function cara(key){const k=sv,g=G[k],p=fmt(g.p),tbn=k==='R'?' (batas bawah kelas dikurangi 0,05)':'';let T,F,st,note='';
+if(key==='mean'){const m=mean(k);T='Mean (rata-rata)';F='x̄ = Σ(fᵢ · xᵢ) ÷ n';
+st=['Kalikan frekuensi dengan titik tengah tiap kelas: '+g.f.map((f,i)=>`(${f} × ${fmt(g.xi[i])})`).join(' + ')+' = '+fmt(m.s),'Banyak data n = '+NN,`x̄ = ${fmt(m.s)} ÷ ${NN} = <b>${fmt(m.val)}</b>`];
+if(g.tg)note='Pada data tunggal (nilai asli tanpa dikelompokkan), mean = '+g.tg[0]+'. Angka itu yang tertulis di slide.'}
+else if(key==='modus'){const o=modus(k),m=o.m,tie=g.f.filter(v=>v===g.f[m]).length>1;T='Modus';F='Mo = Tb + (d₁ ÷ (d₁ + d₂)) × p';
+st=[`Kelas modus = kelas dengan frekuensi terbanyak: <b>${g.lab[m]}</b> (f = ${g.f[m]})${tie?'. Ada kelas lain dengan f yang sama, dipakai yang pertama':''}`,`Tb = ${fmt(g.tb[m])}${tbn}; p = ${p}`,`d₁ = ${g.f[m]} − ${m?g.f[m-1]:0} = ${o.d1} (selisih dengan kelas sebelumnya)`,`d₂ = ${g.f[m]} − ${m<3?g.f[m+1]:0} = ${o.d2} (selisih dengan kelas sesudahnya)`,`Mo = ${fmt(g.tb[m])} + (${o.d1} ÷ (${o.d1} + ${o.d2})) × ${p}`,`Mo = ${fmt(g.tb[m])} + ${fmt(o.fr)} = <b>${fmt(o.val)}</b>`];
+if(g.tg)note='Pada data tunggal, modus = '+g.tg[1]+'. Angka itu yang tertulis di slide.'}
+else{const c=key[0],q={Q:4,D:10,P:100}[c],i=+key.slice(1),o=loc(k,q,i);T={Q:'Kuartil ',D:'Desil ',P:'Persentil '}[c]+key+(key==='Q2'?' (median)':'');
+F=`${key} = Tb + ((${i}·n/${q} − F) ÷ f) × p`;
+st=[`Letak data = ${i}/${q} × n = ${i}/${q} × ${NN} = <b>${fmt(o.L)}</b>`,`Cari kelas pertama dengan fk ≥ ${fmt(o.L)} pada tabel di atas: kelas <b>${g.lab[o.x]}</b> (fk = ${g.fk[o.x]})`,`Tb = ${fmt(g.tb[o.x])}${tbn}; F = ${o.F} (fk kelas sebelumnya); f = ${o.f}; p = ${p}`,`${key} = ${fmt(g.tb[o.x])} + ((${fmt(o.L)} − ${o.F}) ÷ ${o.f}) × ${p}`,`${key} = ${fmt(g.tb[o.x])} + ${fmt(o.fr)} = <b>${fmt(o.val)}</b>`];
+if(k==='E'&&key==='P1')note='Kalau memakai P10, hasilnya 93,75.'}
+$('#mc').innerHTML=`<h3>${T}</h3><p><b>${N[k]}</b> · data berkelompok, n = ${NN}, p = ${p}</p><div class="fm">${F}</div>${ftab(k)}<ol>${st.map(x=>`<li>${x}</li>`).join('')}</ol>${note?`<p class="nt">${note}</p>`:''}`;
+$('#mo').classList.add('show');$('#mx').focus()}
+const openCara=e=>{const b=e.target.closest('.how');if(b)cara(b.dataset.k)};
+$('#sc').addEventListener('click',openCara);$('#pd').addEventListener('click',openCara);
+const closeMo=()=>$('#mo').classList.remove('show');
+$('#mx').onclick=closeMo;$('#mo').onclick=e=>{if(e.target.id==='mo')closeMo()};
+addEventListener('keydown',e=>{if(e.key==='Escape')closeMo()});
+/* GAME */
+let ans=null,streak=0,pair=null;
+function ga(){const k=['R','C','E'][Math.random()*3|0];ans=k;const t=S[k].t;$('#ga').innerHTML=hist(t.map(x=>x[0]),t.map(x=>x[1]),'#e8a33a',true);$('#gaf').textContent='';$('#hint').disabled=false;
+$('#gao').innerHTML=V3.map(([a,l])=>`<button class="chip" data-k="${a}">${l}</button>`).join('')}
+$('#gao').onclick=e=>{const k=e.target.dataset.k;if(!k||!ans)return;const t=S[ans].t;if(k===ans){addCoin(10);burst();$('#gaf').textContent='Benar! +10 koin. Ini histogram '+N[ans]+'.';$('#ga').innerHTML=hist(t.map(x=>x[0]),t.map(x=>x[1]),CL[ans]);ans=null;setTimeout(ga,2200)}else{$('#gaf').textContent='Belum tepat, coba lagi.';$('#ga').classList.remove('shake');void $('#ga').offsetWidth;$('#ga').classList.add('shake')}};
+$('#hint').onclick=()=>{if(!ans)return;const t=S[ans].t;addCoin(-3);$('#ga').innerHTML=hist(t.map(x=>x[0]),t.map(x=>x[1]),'#e8a33a',false);$('#hint').disabled=true};
+function gb(){const k=['R','C','E'][Math.random()*3|0];let a,b;do{a=Math.random()*10|0;b=Math.random()*10|0}while(D[k][a]===D[k][b]);pair={k,a,b};$('#gbq').textContent='Menurut '+N[k]+', kelas mana yang lebih tinggi?';
+$('#gb').innerHTML=`<button class="btn" data-i="${a}">${K[a]}</button><b>vs</b><button class="btn" data-i="${b}">${K[b]}</button>`}
+$('#gb').onclick=e=>{const i=e.target.dataset.i;if(i==null||!pair)return;const {k,a,b}=pair,w=D[k][a]>D[k][b]?a:b,msg=`${K[a]} = ${fmt(D[k][a])}, ${K[b]} = ${fmt(D[k][b])}.`;
+if(+i===w){streak++;addCoin(5+(streak>2?2:0));$('#gbf').textContent='Tepat! '+msg}else{streak=0;$('#gbf').textContent='Kurang tepat. '+msg;$('#gb').classList.remove('shake');void $('#gb').offsetWidth;$('#gb').classList.add('shake')}
+$('#sk').textContent=streak;pair=null;setTimeout(()=>{gb();$('#gbf').textContent=''},1800)};
+/* GALERI, KESIMPULAN, KALKULATOR, TEMA */
+function kes(){const cl={R:'bl',C:'pk',E:'ol'},ms={},rg={};
+$('#kc').innerHTML=['R','C','E'].map(k=>{const v=D[k],mx=Math.max(...v),mn=Math.min(...v),a=r(v.reduce((x,y)=>x+y)/10);ms[k]=a;rg[k]=+(mx-mn).toFixed(2);
+return `<div class="card ${cl[k]}"><h3>${N[k]}</h3><p>Tertinggi <b>${fmt(mx)}</b> (${K.filter((_,i)=>v[i]===mx).join(', ')}).<br>Terendah <b>${fmt(mn)}</b> (${K.filter((_,i)=>v[i]===mn).join(', ')}).<br>Rata-rata <b>${fmt(a)}</b>, rentang ${fmt(rg[k])}.</p></div>`}).join('');
+const o=Object.keys(ms).sort((a,b)=>ms[b]-ms[a]),w=Object.keys(rg).sort((a,b)=>rg[b]-rg[a])[0];
+$('#kb').innerHTML=`Rata-rata tertinggi ada pada <b>${N[o[0]]}</b> (${fmt(ms[o[0]])}), disusul ${N[o[1]]} (${fmt(ms[o[1]])}) dan ${N[o[2]]} (${fmt(ms[o[2]])}). Data paling beragam pada <b>${N[w]}</b> (rentang ${fmt(rg[w])}). Peringkat 1 diraih ${K.filter((_,i)=>PK[i]===1).join(' dan ')}.`}
+function num(id){return parseFloat($(id).value.replace(',','.'))}
+$('#cgo').onclick=()=>{const q=+$('#cs').value,i=num('#ci'),n=num('#cn'),b=num('#cb'),F=num('#cF'),f=num('#cf'),p=num('#cp'),c=$('#cr');
+if([i,n,b,F,f,p].some(isNaN)||isNaN(p)||f<=0){c.textContent='Isi semua kolom dengan angka, dan f harus lebih dari 0.';return}
+const L=i*n/q,fr=(L-F)/f*p,v=b+fr,nm={4:'Q',10:'D',100:'P'}[q]+fmt(i);
+c.innerHTML=`Letak data = ${fmt(i)}/${q} × ${fmt(n)} = ${fmt(+L.toFixed(3))}<br>${nm} = ${fmt(b)} + ((${fmt(+L.toFixed(3))} − ${fmt(F)}) ÷ ${fmt(f)}) × ${fmt(p)}<br>${nm} = ${fmt(b)} + ${fmt(+fr.toFixed(3))} = <b>${fmt(+v.toFixed(3))}</b>`};
+$('#th').onclick=()=>{const d=document.documentElement,c=d.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.dataset.theme=c==='dark'?'light':'dark'};
+/* ROUTER */
+const V=['data','grafik','statistik','kesimpulan','game'],init={};
+function route(){let v=location.hash.slice(1);if(!V.includes(v))v='data';V.forEach(x=>$('#v-'+x).hidden=x!==v);document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.hash==='#'+v));
+if(v==='data')table();if(v==='grafik'){bars();donut();hs();chips($('#bt'),V3,k=>on[k],k=>{on[k]=on[k]?0:1;bars()});chips($('#ht'),V3,k=>k===hv,k=>{hv=k;hs()})}
+if(v==='statistik')stat();if(v==='kesimpulan')kes();if(v==='game'){ga();gb()}scrollTo(0,0)}
+addEventListener('hashchange',route);addCoin(0);route();
+</script></body></html>
